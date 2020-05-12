@@ -1,0 +1,8 @@
+.container-fluid {
+    min-height: 90vh;
+}
+
+.col-xs-12.col-md-6.col-lg-4 {
+    min-height: 30vh;
+    padding: 15px;
+}

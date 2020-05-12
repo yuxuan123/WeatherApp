@@ -1,0 +1,32 @@
+<div >
+    <div *ngIf="weather.isEmpty; else elseBlock">
+        <div *ngIf="searchBar; else elseBlock">
+            <form>
+                <div class="form">
+                    <label>Enter a city: </label>
+                    <input type="text" name="city" class="form-control" [(ngModel)]="city">
+                    <button class="btn btn-primary" (click)="search()">Search</button>
+                    <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <ng-template #elseBlock>
+            <button class="btn btn-dark btn-lg btn-block" (click)="add()">Add</button>
+        </ng-template>
+    </div>
+    <ng-template #elseBlock>
+        <div id='bg-image' [style.background]="'url(' + bgImg + ')'">
+            <h2>
+                {{ weather.location }}
+            </h2>
+            <h3>
+                {{ weather.desc }}
+            </h3>
+            <span>
+                Temp: {{ weather.temp }} <br>
+                Feels like: {{ weather.feelsLike }}
+            </span>
+            <button class="btn btn-primary" (click)="edit()">Edit</button>
+       </div>
+    </ng-template>
+</div>
