@@ -16,7 +16,6 @@ export class WeatherService {
   constructor(private http: HttpClient) { }
 
   getCurrentWeather(loc: string) {
-    console.log(`${environment.apiUrl}/weather?q=${loc}&appid=${apiKey}`)
     return this.http.get(`${environment.apiUrl}/weather?q=${loc}&appid=${apiKey}`).pipe(
       catchError(this.handleError)
     );

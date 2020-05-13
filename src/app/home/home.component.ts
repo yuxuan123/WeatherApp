@@ -1,7 +1,6 @@
 import { DbService } from './../db.service';
 import { Weather } from './../../models/weather.model';
 import { Component, OnInit } from '@angular/core';
-import { resolve } from 'dns';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +10,6 @@ import { resolve } from 'dns';
 export class HomeComponent implements OnInit {
 
   weatherList: Array<Weather> = [];
-  weatherFromDb: Array<Weather> = [];
 
   constructor(private dbService: DbService) { 
   }
@@ -23,7 +21,6 @@ export class HomeComponent implements OnInit {
       
       weathers.forEach((weather) => {
         this.weatherList = [...this.weatherList, weather];
-        console.log(weather)
       })
       if (this.weatherList.length == 0) {
         this.initWeatherList()
@@ -42,7 +39,6 @@ export class HomeComponent implements OnInit {
   }
 
   onDeleteWeather(delWeather: Weather) {
-    console.log('deleted : ' + delWeather.location)
     this.dbService
       .update(delWeather.id, delWeather)
       .then(() => {
@@ -50,13 +46,6 @@ export class HomeComponent implements OnInit {
         let index = this.weatherList.findIndex((weather) => weather.id === id);
         this.weatherList[index] = delWeather;
       });
-
-    this.dbService.getAll().then((weathers: Array<Weather>) => {
-    
-      weathers.forEach((weather) => {
-        console.log(weather)
-      })
-    })
   }
 
   initWeatherList() {
@@ -65,7 +54,6 @@ export class HomeComponent implements OnInit {
       this.dbService
         .add(newWeather)
         .then((id) => {
-          console.log('id:' + id)
           newWeather.id = id;
           this.addToWeatherList(newWeather);
         });
