@@ -12,3 +12,7 @@ html, body {
       text-align: center;
       margin: 2vh 0;
   }
+
+  .btn {
+      border-radius: 0px !important;
+  }

@@ -1,12 +1,13 @@
 <div >
     <div *ngIf="weather.isEmpty; else elseBlock">
-        <div *ngIf="searchBar; else elseBlock">
+        <div class="search-box" *ngIf="searchBar; else elseBlock">
             <form>
                 <div class="form">
-                    <label>Enter a city: </label>
-                    <input type="text" name="city" class="form-control" [(ngModel)]="city">
-                    <button class="btn btn-primary" (click)="search()">Search</button>
-                    <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+                    <input type="text" placeholder="Enter a city" name="city" class="form-control" [(ngModel)]="city">
+                    <div class="buttons">
+                        <button class="btn btn-primary" (click)="search()">Search</button>
+                        <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -16,17 +17,19 @@
     </div>
     <ng-template #elseBlock>
         <div id='bg-image' [style.background]="'url(' + bgImg + ')'">
-            <h2>
-                {{ weather.location }}
-            </h2>
-            <h3>
-                {{ weather.desc }}
-            </h3>
             <span>
-                Temp: {{ weather.temp }} <br>
-                Feels like: {{ weather.feelsLike }}
+                <h2>
+                    {{ weather.location }}
+                </h2>
+                <h2>
+                    {{ weather.temp }}&deg;C
+                </h2>
+                <h4>
+                    {{ weather.desc }} <br>
+                    Feels like: {{ weather.feelsLike }}&deg;C
+                </h4>
             </span>
-            <button class="btn btn-primary" (click)="edit()">Edit</button>
+            <button id="edit-button" class="btn btn-primary" (click)="edit()">Edit</button>
        </div>
     </ng-template>
 </div>

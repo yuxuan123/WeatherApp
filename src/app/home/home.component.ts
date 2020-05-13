@@ -8,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  weatherList = new Array<Weather>(9);
+  weatherList: Array<Weather> = new Array(9);
 
-  constructor() { }
+  constructor() { 
+    for (let i=0; i < 9; i++) {
+      this.weatherList[i] = new Weather;
+    }
+  }
 
   ngOnInit(): void {
+  
   }
 
 }

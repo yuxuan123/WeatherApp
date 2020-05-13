@@ -30,20 +30,21 @@ export class CurrentWeatherComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.weather = new Weather();
+    setInterval(() => {
+      if (!this.weather.isEmpty) {
+        this.search();
+      }
+    }, 30000);
   }
 
-  toCelcius(fahrenheit) {
-    return (fahrenheit - 32) * 5 / 9;
+  toCelcius(kelvin) {
+    return (kelvin - 273.15).toFixed();
   } 
 
   search() {
-    console.log(this.city);
     this.weatherService.getCurrentWeather(this.city).subscribe((response) => {
-      console.log(response);
       if (response != null) {
         this.res = response;
-        console.log(this.res);
         this.weather.location = this.res.name;
         this.weather.desc = this.res.weather[0].description;
         this.weather.temp = this.toCelcius(this.res.main.temp);
@@ -63,7 +64,7 @@ export class CurrentWeatherComponent implements OnInit {
           this.bgImg = this.clearImg;
         }
         else if (this.weather.desc.includes('snow')) {
-          this.bgImg = this.clearImg;
+          this.bgImg = this.snowImg;
         }
         else {
           this.bgImg = this.clearImg;
@@ -86,6 +87,7 @@ export class CurrentWeatherComponent implements OnInit {
     }
     else {
       this.weather.isEmpty = false;
+      this.city = this.weather.location;
     }
   }
 

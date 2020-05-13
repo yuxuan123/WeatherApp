@@ -2,7 +2,7 @@ export class Weather {
     id: number;
     location: string;
     desc: string;
-    temp: number;
-    feelsLike: number;
+    temp: string;
+    feelsLike: string;
     isEmpty: boolean = true;
 }
