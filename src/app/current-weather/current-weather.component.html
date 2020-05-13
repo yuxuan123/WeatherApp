@@ -12,7 +12,7 @@
             </form>
         </div>
         <ng-template #elseBlock>
-            <button class="btn btn-dark btn-lg btn-block" (click)="add()">Add</button>
+            <button id="add-button" class="btn btn-dark btn-lg btn-block" (click)="add()" title="Add">&#43;</button>
         </ng-template>
     </div>
     <ng-template #elseBlock>
@@ -29,7 +29,12 @@
                     Feels like: {{ weather.feelsLike }}&deg;C
                 </h4>
             </span>
-            <button id="edit-button" class="btn btn-primary" (click)="edit()">Edit</button>
+            <button id="edit-button" class="btn" (click)="edit()">
+                <img [src]="editImg" *ngIf="editImg" width="20px" title="Edit"/>
+            </button>
+            <button id="delete-button" class="btn" (click)="delete()">
+                <img [src]="deleteImg" *ngIf="deleteImg" width="20px" title="Delete"/>
+            </button>
        </div>
     </ng-template>
 </div>

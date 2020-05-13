@@ -1,12 +1,16 @@
 <div>
     <div class="title">
-        <h1>Weather App</h1>
+        <h1>Live Weather</h1>
     </div>
     
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-md-6 col-lg-4" *ngFor="let weather of weatherList; let i = index">
-                <app-current-weather [weather]="weather"> {{ weather }} </app-current-weather>
+            <div class="col-xs-12 col-md-6 col-lg-4" *ngFor="let weather of weatherList">
+                <app-current-weather 
+                [weather]="weather" 
+                (updateWeather)="onUpdateWeather($event)"
+                (deleteWeather)="onDeleteWeather($event)">
+                </app-current-weather>
             </div>
         </div>
     </div>
