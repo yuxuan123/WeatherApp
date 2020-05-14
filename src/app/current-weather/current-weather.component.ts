@@ -13,6 +13,7 @@ export class CurrentWeatherComponent implements OnInit {
   city: string;
   searchBar: boolean = false;
   bgImg: string;
+  isOnline: boolean = false;
   @Input() weather: Weather;
   @Output() updateWeather = new EventEmitter();
   @Output() deleteWeather = new EventEmitter();
@@ -34,7 +35,7 @@ export class CurrentWeatherComponent implements OnInit {
 
   ngOnInit() {
     setInterval(() => {
-      if (!this.weather.isEmpty) {
+      if (!this.weather.isEmpty && this.isOnline) {
         this.search();
       }
     }, 30000);
@@ -51,7 +52,14 @@ export class CurrentWeatherComponent implements OnInit {
 
   search() {
     this.weatherService.getCurrentWeather(this.city).subscribe((response) => {
-      if (response != null) {
+      console.log('res: ' + response);
+      if (response == 'O') {
+        if (!this.isOnline) {
+          window.alert('The browser is currently offline.');
+        }
+        this.setIsOnline(false);
+      }
+      else {
         this.res = response;
         this.weather.location = this.res.name;
         this.weather.desc = this.res.weather[0].description;
@@ -60,6 +68,7 @@ export class CurrentWeatherComponent implements OnInit {
         this.weather.isEmpty = false;
         this.setBackground();
         this.updateWeather.emit(this.weather);
+        this.setIsOnline(true);
       }
     })
   }
@@ -110,6 +119,10 @@ export class CurrentWeatherComponent implements OnInit {
       this.weather.isEmpty = false;
       this.city = this.weather.location;
     }
+  }
+
+  setIsOnline(bool: boolean) {
+    this.isOnline = bool;
   }
 
 }

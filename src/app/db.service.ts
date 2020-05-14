@@ -24,8 +24,6 @@ export class DbService {
   }
 
   update(id, data: Weather) {
-    console.log('DB id: ' + id + ' data: ')
-    console.log(data)
     return this.table.update(id, data);
   }
 

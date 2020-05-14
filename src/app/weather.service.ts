@@ -34,6 +34,11 @@ export class WeatherService {
       else if (error.status == '400') {
         errorMessage = 'Please enter a city name.';
       }
+      // when offline
+      else if (error.status == '0') {
+        errorMessage = 'O';
+        return errorMessage;
+      }
       else {
         errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
       }
