@@ -52,7 +52,6 @@ export class CurrentWeatherComponent implements OnInit {
 
   search() {
     this.weatherService.getCurrentWeather(this.city).subscribe((response) => {
-      console.log('res: ' + response);
       if (response == 'O') {
         if (!this.isOnline) {
           window.alert('The browser is currently offline.');
